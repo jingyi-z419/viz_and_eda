@@ -5,14 +5,14 @@ Visualization
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ─────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+    ## ── Attaching packages ──────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
 
     ## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
     ## ✓ tibble  3.0.3     ✓ dplyr   1.0.2
     ## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
     ## ✓ readr   1.3.1     ✓ forcats 0.5.0
 
-    ## ── Conflicts ────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ─────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -232,3 +232,23 @@ options(
 scale_color_discrete = scale_color_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
 ```
+
+## Data args in `geom`
+
+``` r
+central_park = 
+  weather_df %>%
+  filter(name == "CentralPark_NY")
+
+waikiki = 
+  weather_df %>%
+  filter(name == "Waikiki_HA")
+
+ggplot(data = waikiki, aes(x = date, y = tmax, color = name)) +
+  geom_point() +
+  geom_line(data = central_park)
+```
+
+    ## Warning: Removed 3 rows containing missing values (geom_point).
+
+![](viz_ii_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
